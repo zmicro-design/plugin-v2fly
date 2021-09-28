@@ -1,0 +1,21 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  v2fly config"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  zmicro plugin run compose config $V2FLY_SERVICE_NAME
+}
+
+run() {
+  core $@
+}
+
+run $@

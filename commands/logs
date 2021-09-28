@@ -1,0 +1,21 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  v2fly logs"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  zmicro plugin run compose logs $V2FLY_SERVICE_NAME -f --tail 100
+}
+
+run() {
+  core $@
+}
+
+run $@

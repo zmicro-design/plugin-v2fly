@@ -1,0 +1,3 @@
+export V2FLY_SERVICE_NAME=v2fly
+export V2FLY_SSL_DIR=/etc/v2fly-ssl
+export V2FLY_USER_CONFIG=$HOME/.v2fly

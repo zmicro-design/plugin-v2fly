@@ -1,0 +1,6 @@
+PLUGIN_NAME=v2fly
+PLUGIN_VERSION=v0.0.1
+
+DEPENDENCIES=(
+  "compose@latest"
+)

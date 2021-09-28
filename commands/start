@@ -1,0 +1,34 @@
+#!/bin/bash
+
+load inquirer
+
+help() {
+  echo "Usage:"
+  echo "  v2fly start"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  if [ ! -d $V2FLY_SSL_DIR ]; then
+    log_error "Please prepare ssl($(color_green "fullchain.pem + privkey.pem")) in $(color_green $V2FLY_SSL_DIR)"
+    exit 1
+  fi
+
+  if [ ! -f $V2FLY_USER_CONFIG ]; then
+     inquirer_text "请输入 USER ID:" user_id "$(curl https://httpbin.zcorky.com/uuid 2>/dev/null | awk -F '"' '{print $4}')"
+
+     echo "ID=$user_id" > $V2FLY_USER_CONFIG
+  fi
+
+  zmicro plugin run compose start $V2FLY_SERVICE_NAME
+}
+
+run() {
+  core $@
+}
+
+run $@
